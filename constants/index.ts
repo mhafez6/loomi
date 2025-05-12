@@ -20,6 +20,7 @@ export const filterOptions = [
 
 export const visibilities: Visibility[] = ["public", "private"];
 
+
 export const ICONS = {
   record: "/assets/icons/record.svg",
   close: "/assets/icons/close.svg",
@@ -46,3 +47,98 @@ export const DEFAULT_RECORDING_CONFIG = {
   audioBitsPerSecond: 128000,
   videoBitsPerSecond: 2500000,
 };
+
+
+export const dummyCards = [
+
+  {
+    id: '1',
+    title: 'title here',
+    thumbnail: '/assets/samples/thumbnail (1).png',
+    createdAt: new Date("2025-05-01"),
+    userImg: '/assets/images/jason.png',
+    username: 'That guy',
+    views: 10,
+    visibility: 'public',
+    duration: 156,
+  },
+  {
+    id: '2',
+    title: 'title here',
+    thumbnail: '/assets/samples/thumbnail (2).png',
+    createdAt: new Date("2025-05-01"),
+    userImg: '/assets/images/jason.png',
+    username: 'That guy',
+    views: 10,
+    visibility: 'public',
+    duration: 156,
+  },
+  {
+    id: '3',
+    title: 'title here',
+    thumbnail: '/assets/samples/thumbnail (3).png',
+    createdAt: new Date("2025-05-01"),
+    userImg: '/assets/images/jason.png',
+    username: 'That guy',
+    views: 10,
+    visibility: 'public',
+    duration: 156,
+  },
+  {
+    id: '4',
+    title: 'title here',
+    thumbnail: '/assets/samples/thumbnail (4).png',
+    createdAt: new Date("2025-05-01"),
+    userImg: '/assets/images/jason.png',
+    username: 'That guy',
+    views: 10,
+    visibility: 'public',
+    duration: 156,
+  },
+  {
+    id: '5',
+    title: 'title here',
+    thumbnail: '/assets/samples/thumbnail (5).png',
+    createdAt: new Date("2025-05-01"),
+    userImg: '/assets/images/jason.png',
+    username: 'That guy',
+    views: 10,
+    visibility: 'public',
+    duration: 156,
+  },
+  {
+    id: '6',
+    title: 'title here',
+    thumbnail: '/assets/samples/thumbnail (6).png',
+    createdAt: new Date("2025-05-01"),
+    userImg: '/assets/images/jason.png',
+    username: 'That guy',
+    views: 10,
+    visibility: 'public',
+    duration: 156,
+  },
+  {
+    id: '7',
+    title: 'title here',
+    thumbnail: '/assets/samples/thumbnail (7).png',
+    createdAt: new Date("2025-05-01"),
+    userImg: '/assets/images/jason.png',
+    username: 'That guy',
+    views: 10,
+    visibility: 'public',
+    duration: 156,
+  },
+  {
+    id: '8',
+    title: 'title here',
+    thumbnail: '/assets/samples/thumbnail (8).png',
+    createdAt: new Date("2025-05-01"),
+    userImg: '/assets/images/jason.png',
+    username: 'That guy',
+    views: 10,
+    visibility: 'public',
+    duration: 156,
+  },
+
+
+]

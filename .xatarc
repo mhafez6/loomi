@@ -1,0 +1,6 @@
+{
+  "databaseURL": "https://mhafez6-s-workspace-pe316a.eu-central-1.xata.sh/db/Loomi",
+  "codegen": {
+    "output": "src/xata.ts"
+  }
+}
