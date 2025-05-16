@@ -1,8 +1,9 @@
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
-import { ICONS } from "@/constants";
+
 import DropdownList from "./DropdownList";
+import RecordScreen from "./RecordScreen";
 
 const Header = ({ subHeader, title, userImg }: SharedHeaderProps) => {
   return (
@@ -35,12 +36,7 @@ const Header = ({ subHeader, title, userImg }: SharedHeaderProps) => {
             <span>Upload a video</span>
           </Link>
 
-          <div className="record">
-            <button className="primary-btn">
-              <Image src={ICONS.record} alt="record" width={16} height={16} />
-              <span>Record a video</span>
-            </button>
-          </div>
+          <RecordScreen />
         </aside>
       </section>
 
