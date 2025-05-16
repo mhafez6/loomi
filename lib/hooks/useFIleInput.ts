@@ -19,17 +19,24 @@ export const useFileInput = (max: number) =>  {
 
       setPreviewUrl(objectUrl)
 
+
+
       if(selectedFile.type.startsWith('video')) {
         const video = document.createElement('video')
         video.preload = 'metadata'
+
         video.onloadedmetadata = () => {
           if(isFinite(video.duration) && video.duration > 0){
-            setDuration(Math.round(video.duration))
+            setDuration(Math.ceil(video.duration))
+
           } else {
             setDuration(0)
           }
           URL.revokeObjectURL(video.src)
         }
+
+        video.src = objectUrl
+
       }
     }
   }

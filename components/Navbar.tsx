@@ -1,16 +1,19 @@
-"use client"
+"use client";
 
 import React from "react";
 
 import Image from "next/image";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
+import { redirect, useRouter } from "next/navigation";
+import { authClient } from "@/lib/auth-cleint";
 
 const user = {};
 const id = 123;
 
 const Navbar = () => {
   const router = useRouter();
+  const { data: session } = authClient.useSession();
+  const user = session?.user;
   return (
     <header className="navbar">
       <nav>
@@ -26,17 +29,31 @@ const Navbar = () => {
 
         {user && (
           <figure>
-            <button onClick={() => {router.push(`/profile/${id}`)}}>
+            <button
+              onClick={() => {
+                router.push(`/profile/${id}`);
+              }}
+            >
               <Image
-                src="/assets/images/dummy.jpg"
+                src={user.image || ""}
                 width={36}
                 height={36}
                 alt="PFP"
                 className="rounded-full aspect-square"
-                
               />
             </button>
-            <button className="cursor-pointer">
+            <button
+              className="cursor-pointer"
+              onClick={async () => {
+                return await authClient.signOut({
+                  fetchOptions: {
+                    onSuccess: () => {
+                      redirect("/sign-in");
+                    },
+                  },
+                });
+              }}
+            >
               <Image
                 src="/assets/icons/logout.svg"
                 width={36}
