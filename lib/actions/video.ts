@@ -15,8 +15,8 @@ import { user, videos } from "@/drizzle/schema";
 import { revalidatePath } from "next/cache";
 import aj from "../arcjet";
 import { fixedWindow, request } from "@arcjet/next";
-import { and, eq, or, sql } from "drizzle-orm";
-import { AsyncCallbackSet } from "next/dist/server/lib/async-callback-set";
+import { and, desc, eq, ilike, or, sql } from "drizzle-orm";
+// import { AsyncCallbackSet } from "next/dist/server/lib/async-callback-set";
 
 const VIDEO_STREAM_BASE_URL = BUNNY.STREAM_BASE_URL;
 const THUMBNAIL_STORAGE_BASE_URL = BUNNY.STORAGE_BASE_URL;
@@ -191,5 +191,47 @@ export const getVideoById = withErrorHandling(async (videoId: string) => {
     eq(videos.id, videoId)
   );
 
+
+
   return videoRecord;
 });
+
+export const getAllVideosByUser = withErrorHandling(
+  async (
+    userIdParameter: string,
+    searchQuery: string = "",
+    sortFilter?: string
+  ) => {
+    const currentUserId = (
+      await auth.api.getSession({ headers: await headers() })
+    )?.user.id;
+    const isOwner = userIdParameter === currentUserId;
+
+    const [userInfo] = await db
+      .select({
+        id: user.id,
+        name: user.name,
+        image: user.image,
+        email: user.email,
+      })
+      .from(user)
+      .where(eq(user.id, userIdParameter));
+    if (!userInfo) throw new Error("User not found");
+
+    const conditions = [
+      eq(videos.userId, userIdParameter),
+      // Only add visibility condition if not owner
+      ...(!isOwner ? [eq(videos.visibility, "public")] : []),
+      // Only add search condition if there's a search query
+      ...(searchQuery.trim() ? [ilike(videos.title, `%${searchQuery}%`)] : [])
+    ];
+
+    const userVideos = await buildVideoWithUserQuery()
+      .where(and(...conditions))
+      .orderBy(
+        sortFilter ? getOrderByClause(sortFilter) : desc(videos.createdAt)
+      );
+
+    return { user: userInfo, videos: userVideos, count: userVideos.length };
+  }
+);

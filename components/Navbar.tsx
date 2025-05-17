@@ -7,13 +7,12 @@ import Link from "next/link";
 import { redirect, useRouter } from "next/navigation";
 import { authClient } from "@/lib/auth-cleint";
 
-const user = {};
-const id = 123;
 
 const Navbar = () => {
   const router = useRouter();
   const { data: session } = authClient.useSession();
   const user = session?.user;
+  const id = session?.user?.id;
   return (
     <header className="navbar">
       <nav>
