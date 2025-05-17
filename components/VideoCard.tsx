@@ -39,6 +39,7 @@ const VideoCard = ({
               <p>{visibility}</p>
             </figcaption>
           </figure>
+          {/* Views section commented out until functionality is implemented
           <aside>
             <Image
               src="/assets/icons/eye.svg"
@@ -48,6 +49,7 @@ const VideoCard = ({
             />
             <span>{views}</span>
           </aside>
+          */}
         </div>
         <h2>
           {title} -{" "}
@@ -62,12 +64,9 @@ const VideoCard = ({
         <Image src="/assets/icons/link.svg" alt="copy" width={18} height={18} />
       </button>
 
-
-
       {duration && (
         <div className="duration">{Math.ceil(duration / 60)}min</div>
       )}
-      
     </Link>
   );
 };

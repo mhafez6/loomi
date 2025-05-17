@@ -19,7 +19,7 @@ const Page = () => {
             width={32}
             height={32}
           />
-          <h1>SnapCast</h1>
+          <h1>Loomi</h1>
         </Link>
 
         <div className="description">
@@ -47,13 +47,13 @@ const Page = () => {
                 className="rounded-full"
               />
               <div>
-                <h2>Jason Rivera</h2>
-                <p>Product Designer, NovaByte</p>
+                <h2>Monkey D. Luffy ? </h2>
+                <p>Random guy, probably an unemployed cs major</p>
               </div>
             </article>
           </section>
         </div>
-        <p>© Snapcast 2025</p>
+        <p>© Loomi 2025</p>
       </aside>
       <aside className='google-sign-in'>
           <section>

@@ -4,11 +4,21 @@ import { useScreenRecording } from "@/lib/hooks/useScreenRecording";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useRef, useState } from "react";
+import { authClient } from "@/lib/auth-cleint";
 
 const RecordScreen = () => {
   const router = useRouter();
   const [isOpen, setIsOpen] = useState(false);
   const videoRef = useRef<HTMLVideoElement>(null);
+  const { data: session } = authClient.useSession();
+
+  const handleAuthCheck = () => {
+    if (!session?.user) {
+      router.push('/sign-in');
+      return;
+    }
+    setIsOpen(true);
+  };
 
   const goToUpload = () => {
     if (!recordedBlob) return;
@@ -59,12 +69,12 @@ const RecordScreen = () => {
 
   return (
     <div className="record">
-      <button className="primary-btn" onClick={() => setIsOpen(true)}>
+      <button className="primary-btn" onClick={handleAuthCheck}>
         <Image src={ICONS.record} alt="record" width={16} height={16} />
         <span>Record a video</span>
       </button>
 
-      {isOpen && (
+      {isOpen && session?.user && (
         <section className="dialog">
           <div className="overlay-record" onClick={closeModal} />
           <div className="dialog-content">

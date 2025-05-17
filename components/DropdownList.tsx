@@ -34,7 +34,7 @@ const DropdownList = () => {
 
       {isOpen && (
         <ul className="dropdown">
-          {["Functional", "Someday..", "got bored", "went to read onepiece"].map((option) => (
+          {["Functional", "Someday..", "got bored", "went to watch some 3Blue1Brown"].map((option) => (
             <li key={option} className="list-item">
               {option}
             </li>

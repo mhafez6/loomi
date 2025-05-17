@@ -12,13 +12,15 @@ const Header = ({ subHeader, title, userImg }: SharedHeaderProps) => {
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
-  
-  const [searchQuery, setSearchQuery] = useState(searchParams.get("query") || "");
+
+  const [searchQuery, setSearchQuery] = useState(
+    searchParams.get("query") || ""
+  );
   const debouncedSearch = useDebounce(searchQuery, 300);
 
   useEffect(() => {
     const params = new URLSearchParams(searchParams.toString());
-    
+
     if (debouncedSearch) {
       params.set("query", debouncedSearch);
     } else {
