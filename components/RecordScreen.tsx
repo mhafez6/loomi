@@ -14,7 +14,7 @@ const RecordScreen = () => {
 
   const handleAuthCheck = () => {
     if (!session?.user) {
-      router.push('/sign-in');
+      router.push("/sign-in");
       return;
     }
     setIsOpen(true);

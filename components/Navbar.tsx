@@ -66,15 +66,7 @@ const Navbar = () => {
           <figure>
             <button
               className="py-2.5 px-5 flex items-center gap-2.5 text-sm font-semibold text-dark-100 border border-gray-25 rounded-4xl transition-all duration-300 ease-in-out hover:bg-[#ff4393] hover:text-white hover:border-[#ff4393]"
-              onClick={async () => {
-                return await authClient.signOut({
-                  fetchOptions: {
-                    onSuccess: () => {
-                      redirect("/sign-in");
-                    },
-                  },
-                });
-              }}
+              onClick={() => router.push("/sign-in")}
             >
               Sign In
             </button>
