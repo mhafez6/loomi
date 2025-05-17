@@ -1,11 +1,33 @@
+"use client";
 import Image from "next/image";
 import Link from "next/link";
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { useRouter, useSearchParams, usePathname } from "next/navigation";
+import { useDebounce } from "@/lib/hooks/useDebounce";
 
 import DropdownList from "./DropdownList";
 import RecordScreen from "./RecordScreen";
 
 const Header = ({ subHeader, title, userImg }: SharedHeaderProps) => {
+  const router = useRouter();
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
+  
+  const [searchQuery, setSearchQuery] = useState(searchParams.get("query") || "");
+  const debouncedSearch = useDebounce(searchQuery, 300);
+
+  useEffect(() => {
+    const params = new URLSearchParams(searchParams.toString());
+    
+    if (debouncedSearch) {
+      params.set("query", debouncedSearch);
+    } else {
+      params.delete("query");
+    }
+
+    router.push(`${pathname}?${params.toString()}`);
+  }, [debouncedSearch, pathname, router, searchParams]);
+
   return (
     <header className="header">
       <section className="header-container">
@@ -42,7 +64,12 @@ const Header = ({ subHeader, title, userImg }: SharedHeaderProps) => {
 
       <section className="search-filter">
         <div className="search">
-          <input type="text" placeholder="search for videos, tags, folder..." />
+          <input
+            type="text"
+            placeholder="Search for videos, tags, folder..."
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+          />
           <Image
             src="/assets/icons/search.svg"
             alt="search"
