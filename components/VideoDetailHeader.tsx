@@ -3,6 +3,7 @@ import { daysAgo } from "@/lib/utils";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
+// import DropdownList from "./DropdownList";
 
 const VideoDetailHeader = ({
   title,
@@ -11,15 +12,17 @@ const VideoDetailHeader = ({
   username,
   videoId,
   ownerId,
-  id,
-  visibility,
-  thumbnailUrl,
+
+
+  // visibility,
 }: VideoDetailHeaderProps) => {
+
   const [copied, setCopied] = useState(false);
   const router = useRouter();
 
+
   const handleCopyLink = () => {
-    navigator.clipboard.writeText(`${window.location.origin}/video/${id}`);
+    navigator.clipboard.writeText(`${window.location.origin}/video/${videoId}`);
 
     setCopied(true);
   };

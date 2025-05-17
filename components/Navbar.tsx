@@ -12,7 +12,8 @@ const Navbar = () => {
   const router = useRouter();
   const { data: session } = authClient.useSession();
   const user = session?.user;
-  const id = session?.user?.id;
+  const id = user?.id;
+
   return (
     <header className="navbar">
       <nav>
